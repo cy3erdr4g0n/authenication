@@ -30,28 +30,42 @@ const loginVerify = async (req, res)=>{
 
         }else{
 
-            let hashedPassword = user.password
+            if(user.active == false){
 
-            const validate = await compare(password, hashedPassword);
+                res.status(302).json({
 
-            if(!validate){
+                    'message' : `account haven't been verify`
 
-                res.status(202).json("Invalid detail");
-                        
-                throw new Error("Invalid detail");
+                })
+
+                throw new Error(`account haven't been verify`)
 
             }else{
 
-                let userDetails = { email };
-    
-                const token = jwt.sign(userDetails,secret,{expiresIn:10});
-    
-                res.status(201).json({
+                let hashedPassword = user.password
 
-                    message:'sign in successful',
-    
-                    token:token
-                });
+                const validate = await compare(password, hashedPassword);
+
+                if(!validate){
+
+                    res.status(202).json("Invalid detail");
+                            
+                    throw new Error("Invalid detail");
+
+                }else{
+
+                    let userDetails = { email };
+        
+                    const token = jwt.sign(userDetails,secret,{expiresIn:10});
+        
+                    res.status(201).json({
+
+                        message:'sign in successful',
+        
+                        token:token
+                    });
+
+                };
 
             };
 
