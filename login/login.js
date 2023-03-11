@@ -2,6 +2,8 @@ const userModel = require('../models/auth.models')
 
 const jwt = require('jsonwebtoken')
 
+const validate = require('../middlerwares/login')
+
 const { compare } = require('../sevice/crypto')
 
 const secret = process.env.SECRET
@@ -9,67 +11,81 @@ const secret = process.env.SECRET
 const loginVerify = async (req, res)=>{
 
     try {
-
-        let { email, password } = req.body;
         
-        let user = await userModel.findOne({
+        let { email, password } = req.body;
 
-            email : email
+        let withMessage = validate(req.body)
 
-        });
+        if (withMessage.isValid == true){
 
-        if (!user){
-
-            res.status(302).json({
-
-                'message' : "USER NOT FOUND"
-
+            let user = await userModel.findOne({
+    
+                email : email
+    
             });
 
-            throw Error("USER NOT FOUND");
+            if (!user){
+    
+                res.status(404).json({
+    
+                    message : "USER NOT FOUND"
+    
+                });
+    
+                throw Error("USER NOT FOUND");
+    
+            }else{
+    
+                if(user.active == false){
+    
+                    res.status(302).json({
+    
+                        'message' : `account haven't been verify`
+    
+                    })
+    
+                    throw new Error(`account haven't been verify`)
+    
+                }else{
+    
+                    let hashedPassword = user.password
+    
+                    const validate = await compare(password, hashedPassword);
+    
+                    if(!validate){
+    
+                        res.status(202).json("Invalid detail");
+                                
+                        throw new Error("Invalid detail");
+    
+                    }else{
+    
+                        let userDetails = { email };
+            
+                        const token = jwt.sign(userDetails,secret,{expiresIn:10});
+            
+                        res.status(201).json({
+    
+                            message:'sign in successful',
+            
+                            token:token
+                        });
+    
+                    };
+    
+                };
+    
+            };
 
         }else{
 
-            if(user.active == false){
+            res.status(401).json({            
+    
+                message : `Invalid Credential`
+    
+            }); 
 
-                res.status(302).json({
-
-                    'message' : `account haven't been verify`
-
-                })
-
-                throw new Error(`account haven't been verify`)
-
-            }else{
-
-                let hashedPassword = user.password
-
-                const validate = await compare(password, hashedPassword);
-
-                if(!validate){
-
-                    res.status(202).json("Invalid detail");
-                            
-                    throw new Error("Invalid detail");
-
-                }else{
-
-                    let userDetails = { email };
-        
-                    const token = jwt.sign(userDetails,secret,{expiresIn:10});
-        
-                    res.status(201).json({
-
-                        message:'sign in successful',
-        
-                        token:token
-                    });
-
-                };
-
-            };
-
-        };
+        }
 
     }catch (error) {
         

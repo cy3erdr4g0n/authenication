@@ -2,9 +2,9 @@ const express = require('express')
 
 const router = express.Router()
 
-const validate = require('../middlerwares/validate')
+const validate = require('../middlerwares/Useremail')
 
-const sendotp = require('../otp/sendOtp')
+const sended = require('../signup/index')
 
 const activate = require('../activateAcct/activateUsers')
 
@@ -18,7 +18,8 @@ const resetPassword = require('../passwordReset/passwordReset')
 
 const login = require('../login/login')
 
-router.post('/auth/registration',[validate.signUpUser,validate.validatePassword,validate.validateEmail,validate.validatename, sendotp.sigupOtp]); // for signup
+
+router.post('/auth/registration', sended.sigup); // signup
 
 router.post('/auth/activate', [validate.validateEmail, activate.activateUser]); // to activate a user
 
@@ -32,6 +33,6 @@ router.post('/reset/:userId/:token', [validate.validatePassword, resetPassword.n
 
 router.post('/change/password', [validate.validatePassword, changePasswd.changePassword]) // for change of password 
 
-router.post('/auth/login', [validate.validateEmail, validate.validatePassword, login.loginVerify]) // for login
+router.post('/auth/login', login.loginVerify) // for login
 
 module.exports = router
