@@ -7,7 +7,12 @@ npm run dev
 yarn dev
  
 
+
 # API ON TWO FACTOR AUCTENICATION 
+[['['
+]
+
+]]]]
 `THE CODE WOULD HELP TO KEEP HIGH SECURITY`
 
 
@@ -73,3 +78,51 @@ if none of the checks fails, then update active as true and return
 # THE activateAcct directory where the middlemare where the the account will be acctivate in project...  `[activateAcct/activateUsers]`
 
 # the login dictory is where the middleware where you logininti the account..... [login/login]
+
+
+### addtocart 
+
+`we begin by querying the database using the cart and verifying the users using the session. if the token is valid the product will be add to cart`
+
+
+
+###### authenication
+
+# `post` ## signUp
+
+    - 409 ---- User already Exist
+    - 201 ---- User Created Successful
+    - 400 ---- Bad Request
+
+# `post` ## Login
+
+    - 400 ---- Bad Request
+    - 200 ---- Succeful Login
+    - 401 ---- Invalid Credential
+
+# `post` ## change user Password
+
+    - 401 ---- Unauthorized
+    - 200 ---- Success
+
+# `post` ## Forget Password 
+
+    - 404 ---- User not found
+    - 200 ---- Success
+
+# `post` ## Reset Password
+
+    - 400 ---- Bad Request
+    - 200 ---- Success
+
+# `Customers`
+
+# `route for users`
+
+#   sinup                       ----        /user/auth/registration
+#   activate account            ----        /user/auth/activate
+#   opt                         ----        /user/auth/otp
+#   recover                     ----        /user/recover
+#   reset of password           ----        /user/reset/:userId/:token
+#   change of password          ----        /user/change/password
+#   post # login                ----        /user/auth/login
