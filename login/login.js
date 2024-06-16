@@ -1,10 +1,10 @@
-const userModel = require('../models/auth.models')
+const userModel = require("../models/auth.models")
 
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
 
-const validate = require('../middlerwares/login')
+const validate = require("../middlerwares/login")
 
-const { compare } = require('../sevice/crypto')
+const { compare } = require("../utils/crypto")
 
 const secret = process.env.SECRET
 
@@ -40,11 +40,11 @@ const loginVerify = async (req, res)=>{
     
                     res.status(302).json({
     
-                        'message' : `account haven't been verify`
+                        "message" : `account haven"t been verify`
     
                     })
     
-                    throw new Error(`account haven't been verify`)
+                    throw new Error(`account haven"t been verify`)
     
                 }else{
     
@@ -66,7 +66,7 @@ const loginVerify = async (req, res)=>{
             
                         res.status(201).json({
     
-                            message:'sign in successful',
+                            message:"sign in successful",
             
                             token:token
                         });
@@ -91,7 +91,7 @@ const loginVerify = async (req, res)=>{
         
         res.status(401).json({
 
-            'message' : "INTERNAL SERVER ERROR"
+            "message" : "INTERNAL SERVER ERROR"
 
         });
 

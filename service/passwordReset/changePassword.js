@@ -1,18 +1,18 @@
-const userModel = require('../models/auth.models');
+const userModel = require("../models/auth.models");
 
 const { sendMail } = require("../mail/passwordChangeSucceful");
 
-const { encrypt, compare} = require('../sevice/crypto')
+const { encrypt, compare} = require("../utils/crypto")
 
-const changePassword = async (req, res)=>{
+const  changePassword = async (req, res)=>{
     
     try {
-        
-        let email = req.body.email;
 
         let oldpassword = req.body.oldpassword;
 
-        if (!oldpassword || !email){
+        let password = req.body.password;
+
+        if (!oldpassword || !password){
 
             res.status(202).json("Empty detail are not allowed ");
 

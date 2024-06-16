@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
-require('dotenv').config()
+require("dotenv").config()
 
 
 
@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
 
         unique: true,
 
-        required: 'Your email is required',
+        required: "Your email is required",
 
         trim: true
 
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
 
         type: String,
 
-        required: 'Your username is required'
+        required: "Your username is required"
 
     },
 
@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 
         type: String,
 
-        required: 'Your password is required',
+        required: "Your password is required",
 
         max: 100
     },
@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
 
         type: String,
 
-        required: 'First Name is required',
+        required: "First Name is required",
 
 
         max: 100
@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
 
         type: String,
 
-        required: 'Last Name is required',
+        required: "Last Name is required",
 
         max: 100
 
@@ -117,4 +117,4 @@ const UserSchema = new mongoose.Schema({
 //     });
 // };
 
-module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model("Users", UserSchema);

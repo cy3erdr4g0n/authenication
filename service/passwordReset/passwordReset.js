@@ -1,6 +1,6 @@
 const userModel = require('../models/auth.models')
 
-const { encrypt } = require('../sevice/crypto')
+const { encrypt } = require('../utils/crypto')
 
 const { sendMail } = require("../mail/passwordChangeSucceful")
 

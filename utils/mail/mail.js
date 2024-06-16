@@ -1,5 +1,5 @@
-require('dotenv').config()
-const nodemailer = require('nodemailer');
+require("dotenv").config()
+const nodemailer = require("nodemailer");
 
 sendMail = async ({ email, otp })=>{
 
@@ -33,7 +33,7 @@ sendMail = async ({ email, otp })=>{
 
     to: email,
 
-    subject: 'Verify your email ✔',
+    subject: "Verify your email ✔",
 
     html: `
     <div

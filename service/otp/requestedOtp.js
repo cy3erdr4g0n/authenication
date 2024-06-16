@@ -1,10 +1,10 @@
-const userModel = require('../models/auth.models');
+const userModel = require("../../models/auth.models");
 
-const { sendMail }  = require('../mail/mail'); 
+const { sendMail }  = require("../../mail/mail"); 
 
-const { encrypt } = require('../sevice/crypto')
+const { encrypt } = require("../../utils/crypto")
 
-const otpGenerator = require('otp-generator')
+const otpGenerator = require("otp-generator")
 
 const newOtp = async (req, res)=>{
 

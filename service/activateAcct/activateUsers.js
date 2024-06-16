@@ -1,6 +1,6 @@
 const userModel = require('../models/auth.models')
 
-const { compare } = require('../sevice/crypto')
+const { compare } = require('../utils/crypto')
 
 const activateUser = async (req, res)=>{
 
