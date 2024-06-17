@@ -98,23 +98,4 @@ const UserSchema = new mongoose.Schema({
 
 {timestamps: true});
 
-
-// UserSchema.methods.generateJWT = function() {
-//     const today = new Date();
-//     const expirationDate = new Date(today);
-//     expirationDate.setDate(today.getDate() + 60);
-
-//     let payload = {
-//         id: this._id,
-//         email: this.email,
-//         username: this.username,
-//         firstName: this.firstName,
-//         lastName: this.lastName,
-//     };
-
-//     return jwt.sign(payload, process.env.SECRET, {
-//         expiresIn: parseInt(expirationDate.getTime() / 1000, 10)
-//     });
-// };
-
 module.exports = mongoose.model("Users", UserSchema);
