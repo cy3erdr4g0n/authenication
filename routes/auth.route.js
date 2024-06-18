@@ -5,7 +5,8 @@ const router = express.Router()
 const { sigup,
      ActivateUser, 
      changePassword, 
-     login } = require("./../controllers/auth.controllers")
+     login, 
+     forgetenPassword} = require("./../controllers/auth.controllers")
 
 const validate = require("../middlerwares/Useremail")
 
@@ -26,7 +27,7 @@ router.post("/auth/activate", [validate.validateEmail, ActivateUser]); // to act
 
 router.post("/auth/otp", [validate.validateEmail,newotp.newOtp]); // to request for new otp
 
-router.post("/recover", [validate.validateEmail,reset.generatePasswordReset]); // for forgetten password 
+router.post("/recover", [validate.validateEmail, forgetenPassword]); // for forgetten password 
 
 router.get("/reset/:userId/:token") //  to display the form page for the password reset
 
