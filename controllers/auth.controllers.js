@@ -55,7 +55,15 @@ try {
 }
 }
 
-module.exports.forgetenPassword = ()=>{
+module.exports.forgetenPassword = (req, res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+module.exports.requestForOtp = (req, res)=>{
     try {
         
     } catch (error) {
