@@ -2,11 +2,12 @@ const express = require("express")
 
 const router = express.Router()
 
+const { sigup,
+     ActivateUser, 
+     changePassword, 
+     login } = require("./../controllers/auth.controllers")
+
 const validate = require("../middlerwares/Useremail")
-
-const sended = require("../service/signup/index")
-
-const activate = require("../activateAcct/activateUsers")
 
 const newotp = require("../service/otp/requestedOtp")
 
@@ -19,9 +20,9 @@ const resetPassword = require("../passwordReset/passwordReset")
 const login = require("../login/login")
 
 
-router.post("/auth/registration", sended.sigup); // signup
+router.post("/auth/registration", sigup); // signup
 
-router.post("/auth/activate", [validate.validateEmail, activate.activateUser]); // to activate a user
+router.post("/auth/activate", [validate.validateEmail, ActivateUser]); // to activate a user
 
 router.post("/auth/otp", [validate.validateEmail,newotp.newOtp]); // to request for new otp
 
@@ -31,8 +32,8 @@ router.get("/reset/:userId/:token") //  to display the form page for the passwor
 
 router.post("/reset/:userId/:token", [validate.validatePassword, resetPassword.newPassword]) // for reset of password 
 
-router.post("/change/password", [validate.validatePassword, changePasswd.changePassword]) // for change of password 
+router.post("/change/password", [validate.validatePassword, changePassword]) // for change of password 
 
-router.post("/auth/login", login.loginVerify) // for login
+router.post("/auth/login", login) // for login
 
 module.exports = router
