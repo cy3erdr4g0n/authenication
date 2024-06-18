@@ -54,3 +54,11 @@ try {
     
 }
 }
+
+module.exports.forgetenPassword = ()=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
